@@ -1,11 +1,17 @@
+"use client"
 import { ArrowRight, LayoutDashboard, ShoppingBag } from "lucide-react"
 import { Inter } from "next/font/google"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 
 const InterFont = Inter({
     subsets : ['latin']
 })
 export default function page(){
+    const [message, setMessage] = useState("");
+    useEffect(()=>{
+        fetch('/api/hello').then((res)=>res.json()).then((data)=> setMessage(data.message))
+    }, [])
     return (
         <div className={`${InterFont.className} flex-col flex gap-4 my-12  justify-center items-center text-center w-full h-full `}>
           <div className="bg-[#A5B4FC] rounded-full text-[#354484] font-semibold py-2 px-4">
@@ -22,7 +28,7 @@ export default function page(){
                 <Image fill src={'/images/hand-wave.svg'} alt="hand-wave-icon" className="absolute p-4"  />
             </div>
             <div className="font-semibold text-[#001354] text-4xl">Message from API</div>
-            <div className="bg-[#FFFFFF]  px-16 py-5 text-xl text-[#334282] rounded-lg">"Hello from /api/hello! The Server is running smoothly!"</div>
+            <div className="bg-[#FFFFFF]  px-16 py-5 text-xl text-[#334282] rounded-lg">"{message}"</div>
           </div>
           <div className="sm:grid flex flex-col sm:grid-cols-2 gap-4 ">
             <div className="col-span-1 transition-all duration-300 hover:scale-[105%]  flex items-start cursor-pointer group flex-col gap-2 p-4 justify-start text-start bg-white rounded-xl">
