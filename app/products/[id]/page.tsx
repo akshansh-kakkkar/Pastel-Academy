@@ -75,7 +75,7 @@ export default async function Page({
           >
             {product.description}
           </div>
-          <Link href={'/products'} className="flex hover:scale-[105%] transition-all duration-300 text-3xl font-bold text-white justify-center items-center bg-[#4b5A9C] rounded-full py-3.5 px-2 ">
+          <Link href={'/products'} className="flex lg:w-150 hover:scale-[105%] transition-all duration-300 text-3xl font-bold text-white justify-center items-center bg-[#4b5A9C] rounded-full py-3.5 px-2 ">
           Go Back
           </Link>
           </div>

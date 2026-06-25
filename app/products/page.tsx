@@ -1,4 +1,3 @@
-
 import { ChevronLeft, ChevronRight, Search, Star, Zap } from "lucide-react";
 import { Inter } from "next/font/google";
 import Image from "next/image";
@@ -37,7 +36,7 @@ export default async function page({
             <span>Lightning fast via Static Site Generation (SSG)</span>
           </div>
         </div>
-        <div className="flex">
+        <div className="hidden">
           <input
             placeholder="Search supplies..."
             className="relative outline-[#4B5A9C] font-medium text-lg text-[#4B5A9C]  sm:pl-14 placeholder:text-[#767681] bg-[#F2F4F6] transition-all duration-300 flex gap-2 rounded-full px-4 py-3.5"
