@@ -1,4 +1,4 @@
-import { span } from "framer-motion/client";
+
 import { ChevronLeft, ChevronRight, Search, Star, Zap } from "lucide-react";
 import { Inter } from "next/font/google";
 import Image from "next/image";
@@ -50,7 +50,7 @@ export default async function page({
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:flex xl:justify-center xl:items-center  gap-12 place-items-center">
         {paginatedProducts.map((item: any) => (
           <Link
-            href={`/${item.id}`}
+            href={`/products/${item.id}`}
             className={
               "bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:cursor-pointer transition-all duration-300 hover:scale-[110%] flex flex-col w-[300px] h-[450px] rounded-3xl"
             }
@@ -105,43 +105,45 @@ export default async function page({
         </Link>
         {(() => {
           const pages: (number | string)[] = [];
-          pages.push(1);
-          if (currentPage > 4) {
-            pages.push("...");
-          }
-          for (
-            let i = Math.max(2, currentPage - 1);
-            i <= Math.min(totalPages - 1, currentPage + 1);
-            i++
-          ) {
-
-            pages.push(i);
-          }
-                      if (currentPage < totalPages - 3) {
+          if (totalPages <= 5) {
+            for (let i = 1; i <= totalPages; i++) {
+              pages.push(i);
+            }
+          } else {
+            pages.push(1);
+            if (currentPage > 3) {
               pages.push("...");
             }
-            if (totalPages > 1) {
-              pages.push(totalPages);
+            for( 
+              let i = Math.max(2, currentPage -1);
+              i <= Math.min(totalPages - 1, currentPage + 1);
+              i++
+            ){
+              pages.push(i);
             }
-            return pages.map((item, index) =>
-              item === "..." ? (
-                <span
-                  key={index}
-                  className={`flex bg-white rounded-full h-12 w-12 items-center justify-center `}
-                >
-                  ...
-                </span>
-              ) : (
-                <Link
-                  key={item}
-                  href={`/products?page=${item}`}
-                  className={`flex  h-12 w-12 items-center justify-center rounded-full transition ${currentPage === item ? "bg-[#4B5A9C] text-white" : "bg-white hover:bg-slate-100"} `}
-                >
-                  {item}
-                </Link>
-              ),
-            );
-          
+            if(currentPage < totalPages - 2){
+              pages.push("...")
+            }
+            pages.push(totalPages)
+          }
+          return pages.map((item, index) =>
+            item === "..." ? (
+              <span
+                key={index}
+                className={`flex bg-white rounded-full h-12 w-12 items-center justify-center `}
+              >
+                ...
+              </span>
+            ) : (
+              <Link
+                key={item}
+                href={`/products?page=${item}`}
+                className={`flex  h-12 w-12 items-center justify-center rounded-full transition ${currentPage === item ? "bg-[#4B5A9C] text-white" : "bg-white hover:bg-slate-100"} `}
+              >
+                {item}
+              </Link>
+            ),
+          );
         })()}
         <Link
           className={`flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm transition ${currentPage === totalPages ? "pointer-events-none opacity-50" : "hover:bg-slate-100"} `}
