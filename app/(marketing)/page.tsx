@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { ArrowRight, LayoutDashboard, ShoppingBag } from "lucide-react";
 import { Inter } from "next/font/google";
 import Image from "next/image";
@@ -46,7 +47,7 @@ export default function page() {
         </div>
       </div>
       <div className="sm:grid flex flex-col sm:grid-cols-2 gap-4 ">
-        <div className="col-span-1 transition-all duration-300 hover:scale-[105%]  flex items-start cursor-pointer group flex-col gap-2 p-4 justify-start text-start bg-white rounded-xl">
+        <Link href={'/products'} className="col-span-1 transition-all duration-300 hover:scale-[105%]  flex items-start cursor-pointer group flex-col gap-2 p-4 justify-start text-start bg-white rounded-xl">
           <div className=" bg-[#A6F2CF] rounded-full p-4">
             <ShoppingBag className="text-[#247155]" size={32} />
           </div>
@@ -60,8 +61,8 @@ export default function page() {
               <ArrowRight />
             </span>
           </div>
-        </div>
-        <div className="col-span-1 transition-all duration-300 hover:scale-[105%]  flex items-start cursor-pointer group flex-col gap-2 p-4 justify-start text-start bg-white rounded-xl">
+        </Link>
+        <Link href={'/dashboard'} className="col-span-1 transition-all duration-300 hover:scale-[105%]  flex items-start cursor-pointer group flex-col gap-2 p-4 justify-start text-start bg-white rounded-xl">
           <div className=" bg-[#B9B3D9] rounded-full p-4">
             <LayoutDashboard className="text-[#494465]" size={32} />
           </div>
@@ -75,7 +76,7 @@ export default function page() {
               <ArrowRight />
             </span>
           </div>
-        </div>
+        </Link>
       </div>
     </div>
   );

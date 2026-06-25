@@ -1,6 +1,7 @@
-import { ListFilter, Search, Star, Zap } from "lucide-react";
+import { ChevronLeft, ChevronRight, Search, Star, Zap } from "lucide-react";
 import { Inter } from "next/font/google";
 import Image from "next/image";
+import Link from "next/link";
 const InterFont = Inter({
   subsets: ["latin"],
 });
@@ -17,39 +18,40 @@ export default async function page({
   const start = (currentPage - 1) * 4;
   const paginatedProducts = products.slice(start, start + 4);
   return (
-    <div className={`${InterFont.className} flex flex-col gap-8 mx-10 my-8`}>
-      <div className={`flex justify-between items-end text-center`}>
+    <div className={`${InterFont.className} flex flex-col gap-8 md:mx-10 my-8`}>
+      <div
+        className={`flex gap-12 md:gap-0 md:flex-row md:justify-between flex-col md:items-end text-center`}
+      >
         <div className="flex items-start justify-start gap-2 flex-col">
-          <div className="text-6xl text-[#191C1E] font-bold">
+          <div className="sm:text-4xl text-2xl  md:text-6xl text-start text-[#191C1E] font-bold">
             Study Essentials
           </div>
-          <div className="text-2xl font-normal text-[#454650]">
+          <div className="md:text-2xl text-lg font-normal text-start text-[#454650]">
             Discover our curated collection of soft, aesthetic supplies
           </div>
-          <div className="flex gap-2 px-3 text-xl py-2 bg-[#A5B4FC]/20 text-[#4B5A9C] font-medium rounded-full ">
+          <div className="flex gap-2 px-3 items-center  text-start text-xs sm:text-sm md:text-xl py-2 bg-[#A5B4FC]/20 text-[#4B5A9C] font-medium rounded-full ">
             <span>
               <Zap />
             </span>
             <span>Lightning fast via Static Site Generation (SSG)</span>
           </div>
         </div>
-        <div className="flex  items-center gap-4">
-          <div className=" bg-[#F2F4F6]  flex gap-2 rounded-full px-4 py-3.5">
-            <Search className="text-[#767681]" />
-            <input
-              placeholder="Search supplies..."
-              className="outline-none placeholder:text-[#767681]"
-            />
-          </div>
-          <div className="bg-[#F2F4F6] cursor-pointer hover:bg-[#767681]/10 transition-all duration-300 text-[#4B5A9C] px-4 py-3.5 rounded-full">
-            <ListFilter />
+        <div className="flex">
+          <input
+            placeholder="Search supplies..."
+            className="relative outline-[#4B5A9C] font-medium text-lg text-[#4B5A9C]  pl-14 placeholder:text-[#767681] bg-[#F2F4F6] transition-all duration-300 flex gap-2 rounded-full px-4 py-3.5"
+          />
+          <div className="absolute px-4 py-3.5">
+            <Search className="text-[#767681] " />
           </div>
         </div>
       </div>
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-12 place-items-center">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:flex xl:justify-center xl:items-center  gap-12 place-items-center">
         {paginatedProducts.map((item: any) => (
-          <div
-            className={"bg-white flex flex-col w-[300px] h-[450px] rounded-xl"}
+          <Link href={`/${item.id}`}
+            className={
+              "bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:cursor-pointer transition-all duration-300 hover:scale-[110%] flex flex-col w-[300px] h-[450px] rounded-3xl"
+            }
             key={item.id}
           >
             <Image
@@ -57,11 +59,11 @@ export default async function page({
               alt={item.title}
               width={120}
               height={192}
-              className="bg-[#A5B4FC]/60 rounded-t-xl  w-full p-4 h-[195px] flex justify-start  items-start object-contain"
+              className="bg-[#A5B4FC]/60 rounded-t-3xl  w-full p-4 h-[195px] flex justify-start  items-start object-contain"
             />
             <div className={`p-6 flex flex-col flex-1 gap-4`}>
               <div className={`text-[#5F5A7C] text-md `}>{item.category}</div>
-              <div className="text-2xl text-[#191C1E] font-bold">
+              <div className="text-2xl text-[#191C1E] font-bold h-16 overflow-hidden">
                 {item.title}
               </div>
               <div className="flex gap-1  ">
@@ -80,7 +82,7 @@ export default async function page({
                 <div className="text-[#767681]">({item.rating.count})</div>
               </div>
               <div className="flex mt-auto justify-between items-center ">
-                <div className="text-[#4B5A9C] font-bold text-xl">
+                <div className="text-[#4B5A9C] font-bold text-2xl">
                   ${item.price}
                 </div>
                 <div className="text-[#4B5A9C] cursor-pointer transition-all duration-300 hover:scale-[110%] font-medium text-md bg-[#A5B4FC]/30 py-2 px-4 rounded-full">
@@ -88,8 +90,31 @@ export default async function page({
                 </div>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
+      </div>
+
+      <div className="flex items-center gap-3 mt-10 justify-center">
+        <Link
+          className={`flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm transition ${currentPage === 1 ? "pointer-events-none opacity-50" : "hover:bg-slate-100"} `}
+          href={`/products?page=${currentPage - 1}`}
+        >
+          <ChevronLeft size={20} />
+        </Link>
+            {Array.from({length : totalPages}).map((_, index)=>{
+            const page = index + 1;
+            return (
+              <Link href={`/products?page=${page}`} key={page} className={`flex h-12 w-12 items-center justify-center rounded-full transition ${currentPage === page ? "bg-[#4B5A9C] text-white" : "bg-white hover:bg-slate-100"}`}>
+              </Link>
+            )
+})}
+
+        <Link
+          className={`flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm transition ${currentPage === totalPages ? "pointer-events-none opacity-50" : "hover:bg-slate-100"} `}
+          href={`/products?page=${currentPage + 1}`}
+        >
+          <ChevronRight size={20} />
+        </Link>
       </div>
     </div>
   );
