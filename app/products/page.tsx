@@ -1,3 +1,4 @@
+import { span } from "framer-motion/client";
 import { ChevronLeft, ChevronRight, Search, Star, Zap } from "lucide-react";
 import { Inter } from "next/font/google";
 import Image from "next/image";
@@ -39,16 +40,17 @@ export default async function page({
         <div className="flex">
           <input
             placeholder="Search supplies..."
-            className="relative outline-[#4B5A9C] font-medium text-lg text-[#4B5A9C]  pl-14 placeholder:text-[#767681] bg-[#F2F4F6] transition-all duration-300 flex gap-2 rounded-full px-4 py-3.5"
+            className="relative outline-[#4B5A9C] font-medium text-lg text-[#4B5A9C]  sm:pl-14 placeholder:text-[#767681] bg-[#F2F4F6] transition-all duration-300 flex gap-2 rounded-full px-4 py-3.5"
           />
-          <div className="absolute px-4 py-3.5">
+          <div className="absolute hidden sm:block px-4 py-3.5">
             <Search className="text-[#767681] " />
           </div>
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:flex xl:justify-center xl:items-center  gap-12 place-items-center">
         {paginatedProducts.map((item: any) => (
-          <Link href={`/${item.id}`}
+          <Link
+            href={`/${item.id}`}
             className={
               "bg-white shadow-[0px_4px_20px_rgba(0,0,0,0.04)] hover:cursor-pointer transition-all duration-300 hover:scale-[110%] flex flex-col w-[300px] h-[450px] rounded-3xl"
             }
@@ -101,14 +103,46 @@ export default async function page({
         >
           <ChevronLeft size={20} />
         </Link>
-            {Array.from({length : totalPages}).map((_, index)=>{
-            const page = index + 1;
-            return (
-              <Link href={`/products?page=${page}`} key={page} className={`flex h-12 w-12 items-center justify-center rounded-full transition ${currentPage === page ? "bg-[#4B5A9C] text-white" : "bg-white hover:bg-slate-100"}`}>
-              </Link>
-            )
-})}
+        {(() => {
+          const pages: (number | string)[] = [];
+          pages.push(1);
+          if (currentPage > 4) {
+            pages.push("...");
+          }
+          for (
+            let i = Math.max(2, currentPage - 1);
+            i <= Math.min(totalPages - 1, currentPage + 1);
+            i++
+          ) {
 
+            pages.push(i);
+          }
+                      if (currentPage < totalPages - 3) {
+              pages.push("...");
+            }
+            if (totalPages > 1) {
+              pages.push(totalPages);
+            }
+            return pages.map((item, index) =>
+              item === "..." ? (
+                <span
+                  key={index}
+                  className={`flex bg-white rounded-full h-12 w-12 items-center justify-center `}
+                >
+                  ...
+                </span>
+              ) : (
+                <Link
+                  key={item}
+                  href={`/products?page=${item}`}
+                  className={`flex  h-12 w-12 items-center justify-center rounded-full transition ${currentPage === item ? "bg-[#4B5A9C] text-white" : "bg-white hover:bg-slate-100"} `}
+                >
+                  {item}
+                </Link>
+              ),
+            );
+          
+        })()}
         <Link
           className={`flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-sm transition ${currentPage === totalPages ? "pointer-events-none opacity-50" : "hover:bg-slate-100"} `}
           href={`/products?page=${currentPage + 1}`}
