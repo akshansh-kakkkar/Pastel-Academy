@@ -2,6 +2,7 @@ import { ChevronLeft, ChevronRight, Search, Star, Zap } from "lucide-react";
 import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
+import fallbackProducts from "./fallback-products.json";
 const InterFont = Inter({
   subsets: ["latin"],
 });
@@ -25,7 +26,8 @@ export default async function page({
     }
     products = await res.json();
   }catch(error){
-    console.error(error)
+    console.error(error);
+    products = fallbackProducts;
   }
   const totalPages = Math.ceil(products.length / 4);
   const start = (currentPage - 1) * 4;

@@ -2,6 +2,7 @@ import { ArrowLeft, Star } from "lucide-react";
 import Link from "next/link";
 import { Inter } from "next/font/google";
 import Image from "next/image";
+import fallbackProducts from "../fallback-products.json";
 const interFont = Inter({
   subsets: ["latin"],
 });
@@ -24,7 +25,8 @@ export default async function Page({
     }
     product = await  res.json()
   }catch(error){
-    console.log(error)
+    console.log(error);
+    product = fallbackProducts.find((p: any) => p.id === Number(id)) || null;
   }
   return (
     <div className={` mx-4 sm:mx-10 my-10 ${interFont.className}`}>
