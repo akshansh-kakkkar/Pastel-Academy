@@ -11,9 +11,18 @@ export default async function Page({
   params: Promise<{ id: string }>;
 }) {
   const { id } = await params;
-  const res = await fetch(`https://fakestoreapi.com/products/${id}`);
-  const product = await res.json();
-
+  let product = null;
+  try{
+    const res = await fetch(`https://fakestoreapi.com/products/${id}`, {
+      next : {revalidate : 60},
+    })
+    if(!res.ok){
+      throw new Error(`Api responded with status ${res.status}`);
+    }
+    product = await  res.json()
+  }catch(error){
+    console.log(error)
+  }
   return (
     <div className={` mx-4 sm:mx-10 my-10 ${interFont.className}`}>
       <Link href={"/products"} className="flex gap-2 group text-[#454650]">

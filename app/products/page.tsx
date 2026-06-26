@@ -12,8 +12,18 @@ export default async function page({
 }) {
   const { page } = await searchParams;
   const currentPage = Number(page) || 1;
-  const res = await fetch("https://fakestoreapi.com/products");
-  const products = await res.json();
+  let products = [];
+  try{
+    const res = await fetch("https://fakestoreapi.com/products", {
+      next : {revalidate : 60},
+    });
+    if(!res.ok){
+      throw new Error(`API responded with status ${res.status}`)
+    }
+    products = await res.json();
+  }catch(error){
+    console.error(error)
+  }
   const totalPages = Math.ceil(products.length / 4);
   const start = (currentPage - 1) * 4;
   const paginatedProducts = products.slice(start, start + 4);
