@@ -15,6 +15,9 @@ export default async function Page({
   try{
     const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${id}`, {
       next : {revalidate : 60},
+      headers: {
+        'User-Agent': 'Mozilla/5.0 (compatible; PastelAcademy/1.0)',
+      },
     })
     if(!res.ok){
       throw new Error(`Api responded with status ${res.status}`);
