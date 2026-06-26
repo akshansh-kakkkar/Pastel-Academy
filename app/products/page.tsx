@@ -14,7 +14,7 @@ export default async function page({
   const currentPage = Number(page) || 1;
   let products = [];
   try{
-    const res = await fetch("https://fakestoreapi.com/products", {
+    const res = await fetch(process.env.NEXT_PUBLIC_API_URL!, {
       next : {revalidate : 60},
     });
     if(!res.ok){
