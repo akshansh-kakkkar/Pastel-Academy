@@ -48,7 +48,7 @@ export default function Navbar() {
         animate={{rotate : isOpen ? 360 : 0}}
         transition={{duration : 0.3}}
           onClick={toggleOpen}
-          className={`p-2 sm:hidden block rounded-full cursor-pointer hover:bg-[#4b5a9c3f]`}
+          className={`p-2 sm:hidden z-50 block rounded-full cursor-pointer hover:bg-[#4b5a9c3f]`}
         >
           {isOpen ? (
             <X size={20} className="text-[#4B5A9C]" />
@@ -66,7 +66,7 @@ export default function Navbar() {
             exit={{ x: -100, opacity: 0 }}
             className={`${InterFont.className} relative   sm:hidden `}
           >
-            <div className="flex absolute  mt-2 items-center px-22 py-24 text-center justify-center flex-col w-[180px] h-[120px]  mx-6 px-4 bg-white inset-0 rounded-lg  shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] ">
+            <div className="flex z-50 absolute  mt-2 items-center px-22 py-24 text-center justify-center flex-col w-[180px] h-[120px]  mx-6 px-4 bg-white inset-0 rounded-lg  shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] ">
               <div
                 onClick={() => setIsOpen(false)}
                 className="absolute  left-4 top-4"

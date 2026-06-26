@@ -43,7 +43,7 @@ export default function Page() {
     return <div>Failed</div>;
   }
   return (
-    <div className={`my-10 mx-10 flex flex-col gap-6 ${interFont.className}`}>
+    <div className={`my-10 mx-4 sm:mx-10 flex flex-col gap-6 ${interFont.className}`}>
       <div className="flex flex-col gap-2">
         <div
           className={`${interFont.className} text-5xl font-bold text-[#191C1E]`}
@@ -56,7 +56,7 @@ export default function Page() {
         </div>
       </div>
       <div>
-        <div className="bg-[#F2F4F6] px-12 py-8 border border-[#d4d4d4]  rounded-t-3xl">
+        <div className="bg-[#F2F4F6] px-4 md:px-12 py-8 border border-[#d4d4d4]  rounded-t-3xl">
           <div className="font-bold text-3xl text-[#191C1E]">
             Recent Discussions
           </div>
@@ -67,14 +67,14 @@ export default function Page() {
             return (
               <div
                 key={item.id}
-                className="border-b gap-6 transition-all duration-300 cursor-pointer flex group items-center  h-full w-full border-[#C6C6C6] py-6  px-12"
+                className="border-b gap-6 transition-all duration-300 cursor-pointer flex group items-center  h-full w-full border-[#C6C6C6] py-6  px-4 md:px-12"
               >
                 <div
-                  className={` w-14 h-14 flex items-center text-center justify-center font-bold px-4 py-2 rounded-full text-2xl ${color}`}
+                  className={` sm:w-14 w-12 h-12 sm:h-14 flex items-center text-center justify-center font-bold px-4 py-4 rounded-full text-xl sm:text-2xl ${color}`}
                 >
                   {item.title.charAt(0).toUpperCase()}
                 </div>
-                <div className="text-lg text-[#767681] font-medium group-hover:text-[#4B5A9C] capitalize">
+                <div className="text-sm md:text-lg text-[#767681] font-medium group-hover:text-[#4B5A9C] capitalize">
                   {item.body}
                 </div>
               </div>
