@@ -1,8 +1,7 @@
 "use client";
 import { ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { Inter } from "next/font/google";
-import { useSearchParams } from "next/navigation";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import useSWR from "swr";
 const interFont = Inter({
   subsets: ["latin"],
@@ -85,7 +84,7 @@ export default function Page() {
               router.push(`/dashboard?page=${CurrentPage - 1}`)
             }}} className={`bg-white disabled:bg-white border border-[#C6C6C6] hover:text-white hover:bg-[#4b5a9c] text-[#191C1E] disabled:cursor-not-allowed disabled:text-[#191C1E] transition-all duration-300 cursor-pointer p-1 rounded-md`}><ChevronLeft size={24} /></button>
             <div className="font-medium text-[#4B5A9C] text-xl">{CurrentPage} of {totalPages}</div>
-            <button disabled={totalPages === totalPages} onClick={()=>{if(CurrentPage < totalPages){
+            <button disabled={CurrentPage === totalPages} onClick={()=>{if(CurrentPage < totalPages){
               router.push(`/dashboard?page=${CurrentPage + 1}`)
             }}} className={`bg-white cursor-pointer hover:bg-[#4b5a9c] hover:text-white transition-all duration-300 disabled:cursor-not-allowed disabled:bg-white disabled:text-[#191C1E] text-[#191C1E] border border-[#C6C6C6] p-1 rounded-md`}><ChevronRight size={24} /></button>
           </div>

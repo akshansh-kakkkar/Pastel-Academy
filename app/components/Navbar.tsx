@@ -20,9 +20,9 @@ export default function Navbar() {
       <div
         className={`sm:mx-10 mx-4 items-center text-center px-10 shadow-[0px_4px_20px_0px_rgba(0,0,0,0.04)] mt-4 py-4 flex justify-between rounded-full bg-[#FFFFFF] ${InterFont.className}`}
       >
-        <div className={`font-semibold text-xl sm:text-2xl text-[#4B5A9C]`}>
+        <Link href={'/'} className={`font-semibold text-xl sm:text-2xl text-[#4B5A9C]`}>
           PastelAcademy
-        </div>
+        </Link>
         <div className="hidden sm:block flex gap-12 transition-all duration-300 font-medium text-lg text-[#454650]">
           <Link
             href={"/"}
