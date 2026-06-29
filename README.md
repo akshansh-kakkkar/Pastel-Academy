@@ -42,8 +42,6 @@ npm run dev
 ```
  
 ##### Note : AI was used to fix the fake api error in the deploy because vercel was not accepting the data sent by fake api and I read alot of docs and stuff to fix it but at the end I took help of ai to fix it after struggling with it for hours and hours. you can also have a look of a thread below for the context.
-
-https://hackclub.slack.com/archives/C0AKNMLG2P5/p1782472206908239
-
+https://hackclub.slack.com/archives/C0AKNMLG2P5/p1782473401634269?thread_ts=1782472206.908239&cid=C0AKNMLG2P5
 and all set!
 
