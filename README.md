@@ -6,7 +6,7 @@ It's a product information checker platform with some extra features which I hav
 - Custom loading screen
 - Custom 404 page
 - fake items from "https://fakestoreapi.com/products"
-- fake discussion from "https://jsonplaceholder.typicode.com/posts"
+- fake discussion from "https://dummyjson.com/posts"
 - Client Side Rendering (CSR) powered by SWR for seamless lightweight data etching.
 
 ## Tech Stack

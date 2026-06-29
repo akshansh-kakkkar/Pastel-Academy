@@ -12,7 +12,7 @@ export default function Page() {
   const page = searchParams.get("page");
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
   const { data, error, isLoading } = useSWR(
-    "https://jsonplaceholder.typicode.com/posts",
+    "https://dummyjson.com/posts",
     fetcher,
     {
       refreshInterval: 10000,
@@ -27,10 +27,11 @@ export default function Page() {
     "bg-sky-200 text-sky-700",
   ];
   const router = useRouter()
-  const totalPages = Math.ceil((data?.length || 0 )/ perPageItems);
+  const posts = data?.posts ?? []
+  const totalPages = Math.ceil((posts?.length || 0 )/ perPageItems);
   const CurrentPage = Number(page) || 1;
   const startPage = (CurrentPage - 1) * perPageItems;
-  const paginatedItems = data?.slice(startPage, startPage + perPageItems) || [];
+  const paginatedItems = posts?.slice(startPage, startPage + perPageItems) || [];
   if (isLoading) {
     return (
       <div className="w-full min-h-[75vh] flex items-center justify-center text-center">
